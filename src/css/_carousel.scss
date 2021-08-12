@@ -1,0 +1,86 @@
+$button-size: 52px;
+
+.carousel {
+  display: flex;
+  align-items: flex-end;
+
+  @media (min-width: 600px) {
+    align-items: center;
+  }
+
+  button {
+    border: 2px solid transparent;
+    background-color: #002e5d;
+    cursor: pointer;
+    border-radius: 8px;
+    padding: 0;
+    height: $button-size;
+    z-index: 2;
+    opacity: 0.9;
+    margin-bottom: -$button-size;
+
+    @media (min-width: 600px) {
+      margin-bottom: 0;
+    }
+
+    &[disabled] {
+      background-color: #ccc;
+      cursor: initial;
+    }
+
+    &:not([disabled]):hover {
+      opacity: 1;
+    }
+
+    img {
+      filter: invert(1);
+    }
+  }
+
+  .slide-window {
+    position: relative;
+    width: 100%;
+    margin: 0 -#{$button-size};
+
+    @media (min-width: 600px) {
+      width: calc(100% - #{$button-size * 2});
+      margin: 0 -5px;
+    }
+
+    &:before,
+    &:after {
+      content: '';
+      z-index: 1;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 2rem;
+    }
+
+    &:before {
+      left: 0;
+      background: linear-gradient(to left, rgba(255, 255, 255, 0), #fff 90%);
+    }
+
+    &:after {
+      right: 0;
+      background: linear-gradient(to right, rgba(255, 255, 255, 0), #fff 90%);
+    }
+  }
+
+  .slide-container {
+    overflow-x: hidden;
+    display: flex;
+    padding: 0.75rem;
+  }
+
+  .slide {
+    &:first-child {
+      margin-left: 100%;
+    }
+
+    &:last-child {
+      margin-right: 100%;
+    }
+  }
+}
