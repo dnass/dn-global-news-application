@@ -3,9 +3,21 @@ $button-size: 52px;
 .carousel {
   display: flex;
   align-items: flex-end;
+  margin-bottom: 4em;
 
   @media (min-width: 600px) {
     align-items: center;
+  }
+
+  .button-container {
+    z-index: 1;
+
+    &:hover {
+      button {
+        opacity: 1;
+        transform: translateX(5px);
+      }
+    }
   }
 
   button {
@@ -18,6 +30,9 @@ $button-size: 52px;
     z-index: 2;
     opacity: 0.9;
     margin-bottom: -$button-size;
+    transition: 0.15s linear transform;
+    // border-left: 10px solid transparent;
+    // margin-left: -10px;
 
     @media (min-width: 600px) {
       margin-bottom: 0;
@@ -28,9 +43,10 @@ $button-size: 52px;
       cursor: initial;
     }
 
-    &:not([disabled]):hover {
-      opacity: 1;
-    }
+    // &:not([disabled]):hover {
+    //   opacity: 1;
+    //   transform: translateX(5px);
+    // }
 
     img {
       filter: invert(1);

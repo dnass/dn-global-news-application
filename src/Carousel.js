@@ -26,15 +26,19 @@ class Carousel {
   setupCarousel() {
     this.target.innerHTML = `
       <div class="carousel">
-        <button aria-label="Previous">
-          <img src="/src/images/left_arrow.svg" />
-        </button>
+        <div class="button-container">
+          <button aria-label="Previous">
+            <img src="/src/images/left_arrow.svg" />
+          </button>
+        </div>
         <div class="slide-window">
           <div class="slide-container"></div>
         </div>
-        <button aria-label="Next">
-          <img src="/src/images/right_arrow.svg" />
-        </button>
+        <div class="button-container">
+          <button aria-label="Next">
+            <img src="/src/images/right_arrow.svg" />
+          </button>
+        </div>
       </div>
     `;
 
@@ -43,11 +47,11 @@ class Carousel {
     this.nextButton = this.target.querySelector('[aria-label="Next"]');
 
     this.prevButton.addEventListener('click', () => {
-      this.scrollTo(this.currentSlide - 1);
+      this.scrollBy(-1);
     });
 
     this.nextButton.addEventListener('click', () => {
-      this.scrollTo(this.currentSlide + 1);
+      this.scrollBy(1);
     });
   }
 
@@ -95,6 +99,14 @@ class Carousel {
     this.scrollTo(0);
   }
 
+  scrollBy(increment) {
+    if (increment + this.currentSlide === this.slides.length) {
+      this.scrollTo(0);
+    } else {
+      this.scrollTo(increment + this.currentSlide);
+    }
+  }
+
   /**
    * Scrolls the carousel to a given slide.
    * @param {number} index The index of the slide to scroll to.
@@ -117,7 +129,7 @@ class Carousel {
     this.slideContainer.scroll({ left, behavior: 'smooth' });
 
     this.prevButton.disabled = index === 0;
-    this.nextButton.disabled = index === this.slides.length - 1;
+    // this.nextButton.disabled = index === this.slides.length - 1;
 
     this.currentSlide = index;
   }
